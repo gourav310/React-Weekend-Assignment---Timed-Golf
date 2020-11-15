@@ -8,32 +8,34 @@ class Timer extends React.Component {
     this.buttonClickHandler = this.buttonClickHandler.bind(this)
   };
   Arrow(e){
-    if(e.keyCode===39){        
-     if(this.state.renderBall){
-         const position = this.state.x+5;
-         this.setState({x:position});
-    }
-     }
-    if(e.keyCode===40){        
-    if(this.state.renderBall){
+    if(this.state.x!==250 || this.state.y!==250){
+          if(e.keyCode===39){        
+          if(this.state.renderBall){
+              const position = this.state.x+5;
+              this.setState({x:position});
+          }
+          }
+          if(e.keyCode===40){        
+          if(this.state.renderBall){
 
-        const position = this.state.y+5;
-        this.setState({y:position});
-    }
-    }
-    if(e.keyCode===38){        
-      if(this.state.renderBall){
-          const position = this.state.y-5;
-          this.setState({y:position});
+              const position = this.state.y+5;
+              this.setState({y:position});
+          }
+          }
+          if(e.keyCode===38){        
+            if(this.state.renderBall){
+                const position = this.state.y-5;
+                this.setState({y:position});
+            }
+            }
+        if(e.keyCode===37){        
+          if(this.state.renderBall){
+              const position = this.state.x-5;
+              this.setState({x:position});
+          }
+          }
       }
-      }
-  if(e.keyCode===37){        
-    if(this.state.renderBall){
-        const position = this.state.x-5;
-        this.setState({x:position});
-    }
-    }
-}
+  }
   componentDidMount() {
     document.addEventListener("keydown",this.Arrow);
   }
@@ -44,13 +46,15 @@ class Timer extends React.Component {
   }
   buttonClickHandler() {
     this.setState({renderBall:true});
+    const time= new Date();
+    console.log(time.value);
 }
   
   render() {
     return (
       <div>
           <div className="ball" style={{top:this.state.y+"px",left:this.state.x+"px"}}></div>
-          <button className="start" onClick={this.buttonClickHandler}>start</button>
+          {!this.state.renderBall && <button className="start" onClick={this.buttonClickHandler}>start</button>}
           <div className="heading-timer">Timer</div>
           <div className="hole"></div>
       </div>
