@@ -5,7 +5,6 @@ class Timer extends React.Component {
     super(props);
     this.state = { renderBall:false, time: 0, x: 0, y: 0,ballPosition: { left: "0px" ,top:"0px"} };
     this.Arrow=this.Arrow.bind(this);
-    this.renderChoice = this.renderBallOrButton.bind(this)
     this.buttonClickHandler = this.buttonClickHandler.bind(this)
   };
   Arrow(e){
@@ -46,19 +45,12 @@ class Timer extends React.Component {
   buttonClickHandler() {
     this.setState({renderBall:true});
 }
-  renderBallOrButton() {
-		if (this.state.renderBall) {
-		    return <div className="ball" style={{top:this.state.y+"px",left:this.state.x+"px"}}></div>
-		} else {
-		    return <button className="start" onClick={this.buttonClickHandler} >Click For One Ball</button>
-		}
-    }
-
-
+  
   render() {
     return (
       <div>
-          {this.renderBallOrButton()}
+          <div className="ball" style={{top:this.state.y+"px",left:this.state.x+"px"}}></div>
+          <button className="start" onClick={this.buttonClickHandler}>start</button>
           <div className="heading-timer">Timer</div>
           <div className="hole"></div>
       </div>
